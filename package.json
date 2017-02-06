@@ -1,0 +1,31 @@
+{
+  "name": "kth-social-revamp",
+  "version": "1.0.0",
+  "description": "Prototype for KTH Social revamp as a browser extension",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "postcss index.css -u postcss-import | csso -o dist/index.css",
+    "build:js": "browserify index.js -t yo-yoify -g unassertify -g uglifyify | uglifyjs -o dist/index.js",
+    "build": "npm run build:css && npm run build:js",
+    "watch": "postcss index.css -w -u postcss-import -o dist/index.css & watchify index.js -d -o dist/index.js",
+    "test": "eslint"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^3.15.0"
+  },
+  "dependencies": {
+    "browserify": "^14.0.0",
+    "csso": "^2.3.1",
+    "postcss-cli": "^2.6.0",
+    "postcss-import": "^9.1.0",
+    "send-action": "^3.0.0",
+    "uglify-js": "^2.7.5",
+    "uglifyify": "^3.0.4",
+    "unassertify": "^2.0.4",
+    "watchify": "^3.9.0",
+    "yo-yo": "^1.4.0",
+    "yo-yoify": "^3.5.0"
+  }
+}

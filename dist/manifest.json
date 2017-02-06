@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "KTH Social Revamp",
+  "description": "Prototype for KTH Social revamp as a browser extension",
+  "version": "1.0",
+  "icons": {
+    "16": "assets/kth-logo-16.png",
+    "48": "assets/kth-logo-48.png",
+    "128": "assets/kth-logo-128.png"
+  },
+  "browser_action": {
+    "default_icon": "assets/kth-logo-16.png",
+    "default_title": "Disable Revamp"
+  },
+  "permissions": [
+    "activeTab",
+    "https://www.kth.se/"
+  ],
+  "content_scripts": [{
+    "matches": ["https://www.kth.se/profile/*"],
+    "css": ["index.css"],
+    "js": ["index.js"]
+  }]
+}
