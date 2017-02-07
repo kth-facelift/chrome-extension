@@ -16,6 +16,8 @@ Fire up the watch command
 $ npm run watch
 ```
 
+Add the dist folder as an unpacked extension to Google Chrome.
+
 ## Development
 
 It's recommended that you use [Extension Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid?hl=en) during development.
