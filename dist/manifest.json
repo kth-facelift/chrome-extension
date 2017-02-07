@@ -10,7 +10,7 @@
   },
   "browser_action": {
     "default_icon": "assets/kth-logo-16.png",
-    "default_title": "Disable Revamp"
+    "default_title": "Disable KTH Facelift"
   },
   "permissions": [
     "activeTab",

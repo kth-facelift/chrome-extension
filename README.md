@@ -21,3 +21,11 @@ Add the dist folder as an unpacked extension to Google Chrome.
 ## Development
 
 It's recommended that you use [Extension Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid?hl=en) during development.
+
+## Build
+
+There's a build script which optimizes and minifies all resources
+
+```bash
+$ npm run build
+```
