@@ -7,9 +7,6 @@ const notifications = require('./lib/notifications');
 
 const parent = document.querySelector('#primaryBlocks');
 
-scrape('https://www.kth.se/social/home/calendar/').then(html => console.log(html));
-
-
 const send = sendAction({
   onAction(state, action, data) {
     switch (action) {
@@ -34,7 +31,7 @@ jsonp('https://www.kth.se/social/home/personal-menu/courses/')
   .then(courses.parse)
   .then(props => send('init', { courses: props }));
 
-jsonp('https://www.kth.se/social/home/personal-menu/schema/')
+scrape('https://www.kth.se/social/home/calendar/')
   .then(schedule.parse)
   .then(props => send('init', { schedule: props }));
 
