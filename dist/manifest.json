@@ -17,7 +17,7 @@
     "https://www.kth.se/"
   ],
   "content_scripts": [{
-    "matches": ["https://www.kth.se/en"],
+    "matches": ["https://www.kth.se/student/minasidor/"],
     "css": ["index.css"],
     "js": ["index.js"]
   }]

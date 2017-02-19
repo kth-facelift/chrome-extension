@@ -4,28 +4,24 @@
 
 ## Setup
 
-Install all the dependencies
+Install all the dependencies – necessary for anything to work at all.
 
 ```bash
 $ npm install
 ```
 
-Fire up the watch command
+Build bundle – concatenates and minifies all resources to the `dist` folder.
+
+```bash
+$ npm run build
+```
+
+Fire up the watch command – watches source files for changes and performs a new build whenever a file is changed/added/removed.
 
 ```bash
 $ npm run watch
 ```
 
-Add the dist folder as an unpacked extension to Google Chrome.
+Add the `dist` folder as an unpacked extension to Google Chrome.
 
-## Development
-
-It's recommended that you use [Extension Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid?hl=en) during development.
-
-## Build
-
-There's a build script which optimizes and minifies all resources
-
-```bash
-$ npm run build
-```
+It's recommended that you use [Extension Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid?hl=en) during development. Whenever a change is made to the [dist/manifest.json](dist/manifest.json) file you'll have to remove the extension from Chrome and add it again.
