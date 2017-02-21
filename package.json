@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build:css": "postcss index.css -u postcss-import | csso -o dist/index.css",
-    "build:js": "browserify index.js -t yo-yoify -t [ babelify --presets [ es2015 ] ] -g unassertify -g uglifyify | uglifyjs -o dist/index.js -b beautify=false,ascii-only=true",
+    "build:js": "browserify index.js -t yo-yoify -t envify -t [ babelify --presets [ es2015 ] ] -g unassertify -g uglifyify | uglifyjs -o dist/index.js -b beautify=false,ascii-only=true",
     "build": "npm run build:css && npm run build:js",
-    "watch": "postcss index.css -w -u postcss-import -o dist/index.css & watchify index.js -d -o dist/index.js",
+    "watch": "postcss index.css -w -u postcss-import -o dist/index.css & watchify index.js -d -t envify -o dist/index.js",
     "test": "eslint"
   },
   "author": "",
@@ -20,6 +20,7 @@
     "babelify": "^7.3.0",
     "browserify": "^14.0.0",
     "csso": "^2.3.1",
+    "envify": "^4.0.0",
     "moment": "^2.17.1",
     "postcss-cli": "^2.6.0",
     "postcss-import": "^9.1.0",
