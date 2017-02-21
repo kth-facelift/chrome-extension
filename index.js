@@ -98,7 +98,7 @@ const send = sendAction({
  * Scrape and parse a bunch of resources on kth.se unless in development
  */
 
-if (!storedState || process.env.NODE_ENV === 'production') {
+if (!storedState || process.env.NODE_ENV !== 'development') {
   jsonp('https://www.kth.se/social/home/personal-menu/courses/')
     .then(require('./lib/courses/parse'))
     .then(props => send('init', { courses: props }));
