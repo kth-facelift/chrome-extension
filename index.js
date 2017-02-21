@@ -39,6 +39,16 @@ const send = sendAction({
       // Toggle notifications
       case 'notifications:show': return clone(state, { showAllNotifications: data });
 
+      // Mark notification as read
+      case 'notifications:dismiss': return clone(state, {
+        notifications: state.notifications.map(props => {
+          if (props.id === data) {
+            return clone(props, { status: 'read' });
+          }
+          return props;
+        })
+      });
+
       // Filter what is shown in list
       case 'schedule:filter': return clone(state, { showSchedule: data });
       case 'events:filter': return clone(state, { showEvents: data });
@@ -85,24 +95,40 @@ const send = sendAction({
 });
 
 /**
+ * Scrape and parse a bunch of resources on kth.se unless in development
  */
 
-// jsonp('https://www.kth.se/social/home/personal-menu/courses/')
-//   .then(require('./lib/courses/parse'))
-//   .then(props => send('init', { courses: props }));
-//
-// scrape('https://www.kth.se/social/home/calendar/')
-//   .then(require('./lib/schedule/parse'))
-//   .then(props => send('init', { schedule: props }));
-//
-// scrape('https://www.kth.se/social/notifications/notice_list/')
-//   .then(require('./lib/notifications/parse'))
-//   .then(props => send('init', { notifications: props }));
-//
-// scrape('https://www.kth.se/aktuellt/kalender?date=2017-02-19&length=90')
-//   .then(require('./lib/events/parse'))
-//   .then(props => send('init', { events: props }));
 if (!storedState || process.env.NODE_ENV === 'production') {
+  jsonp('https://www.kth.se/social/home/personal-menu/courses/')
+    .then(require('./lib/courses/parse'))
+    .then(props => send('init', { courses: props }));
+
+  scrape('https://www.kth.se/social/home/calendar/')
+    .then(require('./lib/schedule/parse'))
+    .then(props => send('init', { schedule: props }));
+
+  scrape('https://www.kth.se/social/notifications/notice_list/')
+    .then(require('./lib/notifications/parse'))
+    .then(props => {
+      const { notifications: prev } = send.state();
+      const notifications = props.map(item => {
+        // Lookup duplicte in existing state
+        const existing = prev.find(prevItem => prevItem.id === item.id);
+
+        if (existing) {
+          // Persist status from old state to the new one
+          return clone(item, { status: existing.status });
+        }
+
+        return item;
+      });
+
+      send('init', { notifications });
+    });
+
+  scrape('https://www.kth.se/aktuellt/kalender?date=2017-02-19&length=90')
+    .then(require('./lib/events/parse'))
+    .then(props => send('init', { events: props }));
 }
 
 /**
