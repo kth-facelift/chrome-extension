@@ -39,6 +39,11 @@ const send = sendAction({
       // Toggle notifications
       case 'notifications:show': return clone(state, { showAllNotifications: data });
 
+      // Filter what is shown in list
+      case 'schedule:filter': return clone(state, { showSchedule: data });
+      case 'events:filter': return clone(state, { showEvents: data });
+      case 'notifications:filter': return clone(state, { showNotifications: data });
+
       // Action is not acocunted for, just forward current state
       default: return state;
     }
@@ -70,7 +75,10 @@ const send = sendAction({
       student: { current: [], finished: [], other: [] },
       teacher: { current: [], finished: [], other: [] }
     },
-    showAllNotifications: false
+    showAllNotifications: false,
+    showSchedule: true,
+    showEvents: true,
+    showNotifications: true
   }
 });
 
