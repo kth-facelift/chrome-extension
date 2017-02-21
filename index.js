@@ -59,6 +59,8 @@ const send = sendAction({
 
   onChange(state, prev) {
     html.update(tree, render(state, prev));
+
+    // Store state in local storage for performance sake
     localStorage.setItem('kth-facelift-state', JSON.stringify(state));
   },
 
@@ -83,7 +85,6 @@ const send = sendAction({
 });
 
 /**
- * Scrape and parse a bunch of resources as kth.se
  */
 
 // jsonp('https://www.kth.se/social/home/personal-menu/courses/')
@@ -101,6 +102,8 @@ const send = sendAction({
 // scrape('https://www.kth.se/aktuellt/kalender?date=2017-02-19&length=90')
 //   .then(require('./lib/events/parse'))
 //   .then(props => send('init', { events: props }));
+if (!storedState || process.env.NODE_ENV === 'production') {
+}
 
 /**
  * Create initial DOM tree with initial state
