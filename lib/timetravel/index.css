@@ -1,0 +1,22 @@
+/** @define Timetravel */
+
+.Timetravel {
+  width: 100%;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  background: #fff;
+  border-top: 1px solid var(--color-light);
+}
+
+/**
+ * 1. Arbitary number that looks good
+ */
+
+.Timetravel-slider {
+  display: block;
+  width: 96%; /* 1 */
+  margin: 1em;
+}

@@ -3,11 +3,33 @@ const sendAction = require('send-action');
 const { jsonp, scrape } = require('./lib/utils');
 const app = require('./lib/app');
 
+const INITIAL_STATE = {
+  events: [],
+  schedule: [],
+  notifications: [],
+  courses: {
+    student: { current: [], finished: [], other: [] },
+    teacher: { current: [], finished: [], other: [] }
+  },
+  showAllNotifications: false,
+  showSchedule: true,
+  showEvents: true,
+  showTodo: true,
+  showNotifications: true
+};
+
 /**
  * Read previously stored state from local storage
  */
 
-const storedState = localStorage.getItem('kth-facelift-state');
+let storedState = localStorage.getItem('kth-facelift-state');
+if (storedState) {
+  try {
+    storedState = JSON.parse(storedState);
+  } catch (err) {
+    storedState = null;
+  }
+}
 
 /**
  * Find root node where to inject application
@@ -50,12 +72,16 @@ const send = sendAction({
       });
 
       // Filter what is shown in list
-      case 'schedule:filter': return clone(state, { showSchedule: data });
-      case 'events:filter': return clone(state, { showEvents: data });
-      case 'notifications:filter': return clone(state, { showNotifications: data });
+      case 'filter:schedule': return clone(state, { showSchedule: data });
+      case 'filter:events': return clone(state, { showEvents: data });
+      case 'filter:notifications': return clone(state, { showNotifications: data });
+      case 'filter:todo': return clone(state, { showTodo: data });
+
+      // Allow modifying the current time
+      case 'timetravel': return Object.assign(state, { now: data });
 
       // Action is not acocunted for, just forward current state
-      default: return state;
+      default: return clone(state);
     }
   },
 
@@ -79,19 +105,7 @@ const send = sendAction({
    * @type {Object}
    */
 
-  state: storedState ? clone(JSON.parse(storedState)) : {
-    events: [],
-    schedule: [],
-    notifications: [],
-    courses: {
-      student: { current: [], finished: [], other: [] },
-      teacher: { current: [], finished: [], other: [] }
-    },
-    showAllNotifications: false,
-    showSchedule: true,
-    showEvents: true,
-    showNotifications: true
-  }
+  state: storedState ? clone(INITIAL_STATE, storedState) : INITIAL_STATE
 });
 
 /**
