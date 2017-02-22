@@ -2,8 +2,11 @@ const html = require('yo-yo');
 const sendAction = require('send-action');
 const { jsonp, scrape } = require('./lib/utils');
 const app = require('./lib/app');
+const todos = require('./lib/todo/sample');
 
 const INITIAL_STATE = {
+  expanded: [],
+  todo: process.env.NODE_ENV !== 'production' ? todos : [],
   events: [],
   schedule: [],
   notifications: [],
@@ -11,10 +14,9 @@ const INITIAL_STATE = {
     student: { current: [], finished: [], other: [] },
     teacher: { current: [], finished: [], other: [] }
   },
-  showAllNotifications: false,
   showSchedule: true,
   showEvents: true,
-  showTodo: true,
+  showTodos: true,
   showNotifications: true
 };
 
@@ -58,9 +60,6 @@ const send = sendAction({
       // Let `init` overwrite whatever may happen to be in the current state
       case 'init': return clone(state, data);
 
-      // Toggle notifications
-      case 'notifications:show': return clone(state, { showAllNotifications: data });
-
       // Mark notification as read
       case 'notifications:dismiss': return clone(state, {
         notifications: state.notifications.map(props => {
@@ -75,10 +74,23 @@ const send = sendAction({
       case 'filter:schedule': return clone(state, { showSchedule: data });
       case 'filter:events': return clone(state, { showEvents: data });
       case 'filter:notifications': return clone(state, { showNotifications: data });
-      case 'filter:todo': return clone(state, { showTodo: data });
+      case 'filter:todo': return clone(state, { showTodos: data });
 
       // Allow modifying the current time
       case 'timetravel': return Object.assign(state, { now: data });
+
+      case 'expand:toggle': {
+        const expanded = state.expanded.slice();
+        const index = expanded.findIndex(id => id === data.id);
+
+        if (index !== -1 && !data.expand) {
+          expanded.splice(index, 1);
+        } else if (index === -1 && data.expand) {
+          expanded.push(data.id);
+        }
+
+        return clone(state, { expanded });
+      }
 
       // Action is not acocunted for, just forward current state
       default: return clone(state);
