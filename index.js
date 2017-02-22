@@ -79,7 +79,7 @@ const send = sendAction({
    * @type {Object}
    */
 
-  state: storedState ? JSON.parse(storedState) : {
+  state: storedState ? clone(JSON.parse(storedState)) : {
     events: [],
     schedule: [],
     notifications: [],
@@ -148,5 +148,5 @@ function render(state, prev) {
 }
 
 function clone(...args) {
-  return Object.assign({}, ...args);
+  return Object.assign({}, ...args, { now: Date.now() });
 }
