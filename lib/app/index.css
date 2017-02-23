@@ -1,5 +1,5 @@
 /** @define App */
 
 .App {
-
+  z-index: 1;
 }

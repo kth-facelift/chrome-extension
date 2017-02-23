@@ -2,18 +2,15 @@ const html = require('yo-yo');
 const sendAction = require('send-action');
 const { jsonp, scrape } = require('./lib/utils');
 const app = require('./lib/app');
-const todos = require('./lib/todo/sample');
+const todos = require('./lib/todos/sample');
 
 const INITIAL_STATE = {
   expanded: [],
-  todo: process.env.NODE_ENV !== 'production' ? todos : [],
+  todos: process.env.NODE_ENV !== 'production' ? todos : [],
   events: [],
   schedule: [],
   notifications: [],
-  courses: {
-    student: { current: [], finished: [], other: [] },
-    teacher: { current: [], finished: [], other: [] }
-  },
+  courses: [],
   showSchedule: true,
   showEvents: true,
   showTodos: true,
