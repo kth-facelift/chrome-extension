@@ -1,0 +1,125 @@
+/** @define List */
+
+.List {
+  padding: 0;
+  margin: 0;
+}
+
+.List-section {
+  list-style: none;
+}
+
+.List-item {
+  list-style: none;
+  display: block;
+  border: solid var(--smoke);
+  border-width: 1px 1px 0 1px;
+  background-color: var(--snow)
+}
+
+.List-item--expandable + .List-item--expandable.is-expanded {
+  border-top-width: 0;
+}
+
+.List-item:last-child {
+  border-bottom-width: 1px;
+}
+
+.List-heading {
+  margin: 2.5rem 0 0.75rem;
+
+  font-size: 1.35rem;
+  text-transform: uppercase;
+}
+
+.List-icon {
+  display: inline-block;
+  margin-right: 0.25em;
+  position: relative;
+  top: 3px;
+}
+
+.List-content {
+  position: relative;
+  padding: var(--space-s) var(--space-s) var(--space-s) calc(var(--space-s) * 2.5);
+  font-size: 1.35rem;
+  line-height: 1.5;
+}
+
+.List-content::before {
+  content: "";
+  display: block;
+  width: 0.5em;
+
+  position: absolute;
+  left: var(--space-s);
+  top: var(--space-s);
+  bottom: var(--space-s);
+
+  background-color: var(--silver);
+}
+
+.List-content--schedule::before {
+  background-color: var(--deep-sky-blue);
+}
+
+.List-content--todo::before {
+  background-color: var(--orange-red);
+}
+
+.List-content--notification::before {
+  background-color: var(--dark-orange);
+}
+
+.List-content--event::before {
+  background-color: var(--lawn-green);
+}
+
+.List-title {
+  margin: 0 0 0.25em;
+  font-weight: bold;
+  font-size: 1.075em;
+  color: #876D00;
+  text-transform: uppercase;
+  -webkit-font-smoothing: antialiased;
+}
+
+.List-dismiss {
+  display: block;
+  width: 1em;
+  height: 1em;
+  padding: 0;
+  border: 0;
+
+  position: absolute;
+  right: var(--space-s);
+  top: var(--space-s);
+
+  outline: 0;
+  font-size: 1.25em;
+  font-weight: bold;
+  background: none;
+  color: var(--black);
+  -webkit-font-smoothing: antialiased;
+}
+
+.List-dismiss:hover {
+  color: var(--orange-red);
+}
+
+/**
+ * 1. Compeeting with silly page styles
+ */
+
+.List-expand {
+  display: block;
+  width: 100%;
+  padding: 0 var(--space-s) var(--space-b);
+  border: 0;
+
+  outline: 0;
+  text-align: left;
+  color: var(--color-link);
+  background: none;
+  border-radius: 0 !important; /* 1 */
+}

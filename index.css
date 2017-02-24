@@ -1,20 +1,40 @@
+@import "./lib/filter";
+@import "./lib/list";
 @import "./lib/timetravel";
 
 :root {
-  --color-primary: #25A2D8;
-  --color-primary--accent: #4AB2DF;
-  --color-secondary: #FFC020;
-  --color-secondary--accent: #FDCE4A;
-  --color-complement: #FE4C20;
-  --color-complement--accent: #FE6E4C;
-  --color-light: #EFEFEF;
-  --color-pale: #C5CCD3;
-  --color-dim: #A8A8A8;
-  --color-dark: #777777;
-  --color-text: #222222;
+  --deep-sky-blue: #25A2D8;
+  --sky-blue: #4AB2DF;
+  --dark-orange: #FFAA23;
+  --orange: #FDCE4A;
+  --orange-red: #FE4C20;
+  --tomato: #FE6E4C;
+  --lawn-green: #B0C92B;
+  --lime: #CBE832;
+  --snow: #FAFBFC;
+  --smoke: #E9EBEC;
+  --silver: #D7D7D7;
+  --black: #222222;
+
+  --sm-threshold: 0px;
+  --md-threshold: 661px;
+  --lg-threshold: 976px;
+
+  --space-n: 0;
+  --space-b: 0.5rem;
+  --space-s: 1.25rem;
+  --space-m: 2.5rem;
+  --space-l: 5rem;
+
+  /** Contextual */
+  --color-link: #24a0d8;
 }
 
-#article {
+@custom-media --sm-viewport (max-width: 660px);
+@custom-media --md-viewport (min-width: 661px) and (max-width: 975px);
+@custom-media --lg-viewport (min-width: 976);
+
+.article {
   display: none;
 }
 

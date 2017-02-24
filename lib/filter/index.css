@@ -1,0 +1,86 @@
+/** @define Filter */
+
+.Filter {
+
+}
+
+.Filter-legend {
+  display: block;
+  font-weight: bold;
+}
+
+.Filter-options {
+
+}
+
+.Filter-input {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.Filter-toggle {
+  float: left;
+  margin-right: 0.75em;
+  white-space: nowrap;
+}
+
+@media (--md-viewport), (--lg-viewport) {
+  .Filter {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+  }
+
+  .Filter-legend {
+    margin-right: 0.75em;
+  }
+}
+
+.Filter-label {
+  padding: 0.5em 1em;
+  border: 1px solid var(--smoke);
+  border-radius: 1.5em;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+.Filter-input:checked + .Filter-label,
+.Filter-label:hover {
+  background: var(--smoke);
+}
+
+.Filter-input:checked + .Filter-label {
+  border-color: var(--silver);
+}
+
+.Filter-label::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 0.5em 0.05em 0;
+  line-height: 0;
+  border-radius: 4px;
+  box-shadow: 0 0 0.5px 0 #fff;
+}
+
+.Filter-label--schedule::before {
+  background-color: var(--deep-sky-blue);
+}
+
+.Filter-label--todo::before {
+  background-color: var(--orange-red);
+}
+
+.Filter-label--notifications::before {
+  background-color: var(--orange);
+}
+
+.Filter-label--events::before {
+  background-color: var(--lawn-green);
+}
