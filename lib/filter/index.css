@@ -58,13 +58,11 @@
   background-color: var(--smoke);
 }
 
-.Filter-label:hover,
-.Filter-input:focus + .Filter-label {
+.Filter-label:hover {
   background-color: var(--snow);
 }
 
-.Filter-label:active,
-.Filter-input:focus + .Filter-label:active {
+.Filter-label:active {
   background-color: var(--smoke);
 }
 
@@ -72,8 +70,7 @@
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0);
 }
 
-.Filter-input:checked + .Filter-label:hover,
-.Filter-input:checked:focus + .Filter-label {
+.Filter-input:checked + .Filter-label:hover {
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
