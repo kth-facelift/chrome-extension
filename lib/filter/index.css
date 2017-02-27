@@ -54,7 +54,7 @@
     background-color 75ms ease-out;
 }
 
-.Filter-input:checked + .Filter-label {
+.Filter-input:checked ~ .Filter-label {
   background-color: var(--smoke);
 }
 
@@ -66,22 +66,30 @@
   background-color: var(--smoke);
 }
 
-.Filter-input:checked + .Filter-label:active {
+.Filter-input:checked ~ .Filter-label:active {
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0);
 }
 
-.Filter-input:checked + .Filter-label:hover {
+.Filter-input:checked ~ .Filter-label:hover {
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
+.Filter-checkmark {
+  position: absolute;
+  left: 0.6em;
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 0;
+  color: #fff;
+}
 
 .Filter-label::before {
-  content: "✕";
+  content: "";
   box-sizing: border-box;
   display: block;
   width: 2em;
   height: 100%;
-  padding-top: 0.425em;
+  padding: 0.45em 0 0 0.2em;
 
   position: absolute;
   left: 0;
@@ -89,6 +97,7 @@
 
   text-align: center;
   border-radius: 1.5em 0 0 1.5em;
+  background: url(data:image/svg+xml;charset=UTF-8,<svg viewBox="0 0 548.873 548.873"><polygon points="449.34,47.966 195.46,301.845 99.533,205.917 0,305.449 95.928,401.378 195.46,500.907 294.99,401.378 548.873,147.496" /></svg>);
 }
 
 .Filter-label--schedule::before {
