@@ -1,0 +1,36 @@
+/** @define Banner */
+
+.Banner {
+  overflow: auto;
+}
+
+.Banner-days {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+}
+
+.Banner-day {
+  list-style: none;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.Banner-header {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.Banner-events {
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+  background: url("chrome-extension://__MSG_@@extension_id__/assets/time-unit.png") repeat 0 0;
+}
+
+.Banner-event {
+  list-style: none;
+}
