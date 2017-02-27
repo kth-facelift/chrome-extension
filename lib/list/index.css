@@ -75,6 +75,21 @@
   background-color: var(--lawn-green);
 }
 
+/**
+ * 1. Compeeting with silly page styles
+ */
+
+.List-toggle {
+  display: inline;
+  padding: 0;
+  border: 0;
+
+  outline: 0;
+  background: none;
+  color: var(--color-link);
+  border-radius: 1em !important; /* 1 */
+}
+
 .List-title {
   margin: 0 0 0.25em;
   font-weight: bold;
