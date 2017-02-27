@@ -23,5 +23,6 @@
     ],
     "css": ["index.css"],
     "js": ["index.js"]
-  }]
+  }],
+  "web_accessible_resources": ["assets/*.png"]
 }
