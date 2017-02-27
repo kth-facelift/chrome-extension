@@ -1,6 +1,8 @@
 /** @define Timetravel */
 
 .Timetravel {
+  display: flex;
+  align-items: center;
   width: 100%;
 
   position: fixed;
@@ -12,12 +14,12 @@
   border-top: 1px solid var(--snow);
 }
 
-/**
- * 1. Arbitary number that looks good
- */
-
 .Timetravel-slider {
   display: block;
-  width: 96%; /* 1 */
-  margin: 1em;
+  flex-grow: 1;
+  margin: 1em 0.5em 1em 1em;
+}
+
+.Timetravel-text {
+  margin: 1em 1em 1em 0.5em;
 }
