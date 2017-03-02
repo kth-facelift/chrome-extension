@@ -32,7 +32,7 @@
 
 @custom-media --sm-viewport (max-width: 660px);
 @custom-media --md-viewport (min-width: 661px) and (max-width: 975px);
-@custom-media --lg-viewport (min-width: 976);
+@custom-media --lg-viewport (min-width: 976px);
 
 .article {
   display: none;
