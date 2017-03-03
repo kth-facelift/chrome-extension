@@ -31,8 +31,10 @@
 
 .Banner-events {
   flex-grow: 1;
+  min-height: 8em;
   padding: 0;
   margin: 0;
+  position: relative;
   background: url("chrome-extension://__MSG_@@extension_id__/assets/time-unit.png") repeat 0 0;
 }
 
@@ -40,65 +42,130 @@
   box-sizing: border-box;
   float: left;
   clear: both;
+  height: 10px;
   list-style: none;
-  padding: 0.75em;
-  margin: 0 0 1em;
+  margin: 0 0 0.5em;
 
   position: relative;
-  overflow: hidden;
-  white-space: nowrap;
+
+  transition: background-color 250ms ease-out;
+}
+
+.Banner-event:hover {
+  z-index: 1;
+}
+
+@keyframes Banner-popup--appear {
+  from {
+    opacity: 0;
+    transform: translateY(-15%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes Banner-popup--disappear {
+  from {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-15%);
+  }
+}
+
+@keyframes Banner-popup--appearReverse {
+  from {
+    opacity: 0;
+    transform: translateY(15%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes Banner-popup--disappearReverse {
+  from {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(15%);
+  }
+}
+
+.Banner-popup {
+  padding: 0.75em;
+
+  position: absolute;
+  left: 0;
+  top: calc(100% + 2px);
 
   color: #fff;
   line-height: 1.5;
   font-size: 12px;
+  white-space: nowrap;
   -webkit-font-smoothing: antialiased;
-  transition:
-    width 400ms cubic-bezier(0.075, 0.82, 0.165, 1),
-    padding 400ms cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  animation-name: Banner-popup--appear;
+  animation-duration: 250ms;
+  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation-fill-mode: forwards;
 }
 
-.Banner-event--schedule {
-  background-color: var(--deep-sky-blue);
-}
-
-.Banner-event--todo {
-  background-color: var(--orange-red);
-}
-
-.Banner-event--event {
-  background-color: var(--lawn-green);
-}
-
-.Banner-event:hover {
-  box-sizing: content-box;;
-  padding-right: 25px;
-  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.Banner-event::after {
-  content: "";
-  width: 100px;
-  height: 100px;
-
-  position: absolute;
-  left: 100%;
-  top: 0;
-
-  transform: rotate(45deg);
-  transform-origin: top left;
-  box-shadow: -1px 0 4px rgba(0, 0, 0, 0.1);
-}
-
-.Banner-event--schedule::after {
+.Banner-event--schedule,
+.Banner-event--schedule .Banner-popup {
   background-color: var(--sky-blue);
 }
 
-.Banner-event--todo::after {
+.Banner-event--todo,
+.Banner-event--todo .Banner-popup {
   background-color: var(--tomato);
 }
 
-.Banner-event--event::after{
+.Banner-event--event,
+.Banner-event--event .Banner-popup {
   background-color: var(--lime);
+}
+
+.Banner-event--placeholder {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.Banner-popup::before {
+  content: "";
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+}
+
+.Banner-popup--ontop {
+  top: auto;
+  bottom: calc(100% + 2px);
+  animation-name: Banner-popup--appearReverse;
+}
+
+.Banner-popup--ontop::before {
+  bottom: auto;
+  top: 100%;
+}
+
+.Banner-popup.is-disappearing {
+  animation-name: Banner-popup--disappear;
+  animation-duration: 250ms;
+  animation-timing-function: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+}
+
+.Banner-popup--ontop.is-disappearing {
+  animation-name: Banner-popup--disappearReverse;
 }
 
 .Banner-link,
