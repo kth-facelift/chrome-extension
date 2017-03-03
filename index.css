@@ -14,7 +14,7 @@
   --orange-red: #FE4C20;
   --tomato: #FE6E4C;
   --lawn-green: #B0C92B;
-  --lime: #CBE832;
+  --lime: #C0DA34;
   --snow: #FAFBFC;
   --smoke: #E9EBEC;
   --silver: #D7D7D7;
@@ -40,6 +40,10 @@
 
 .article {
   display: none;
+}
+
+body #page {
+  overflow: visible;
 }
 
 pre {
