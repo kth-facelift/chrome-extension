@@ -8,7 +8,7 @@
 .Banner-days {
   display: flex;
   flex-wrap: wrap;
-  padding: 0;
+  padding: 0 10px;
   margin: 0;
 }
 
@@ -17,6 +17,11 @@
   float: left;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.Banner-day:hover {
+  z-index: 1;
 }
 
 .Banner-header {
@@ -78,7 +83,6 @@
   position: absolute;
   left: 100%;
   top: 0;
-  z-index: 1;
 
   transform: rotate(45deg);
   transform-origin: top left;
