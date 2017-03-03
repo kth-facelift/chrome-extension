@@ -6,6 +6,7 @@ const todos = require('./lib/todos/sample');
 
 const INITIAL_STATE = {
   expanded: [],
+  search: '',
   todos: process.env.NODE_ENV !== 'production' ? todos : [],
   events: [],
   schedule: [],
@@ -88,6 +89,8 @@ const send = sendAction({
 
         return clone(state, { expanded });
       }
+
+      case 'search:find': return clone(state, { search: data });
 
       // Action is not acocunted for, just forward current state
       default: return clone(state);

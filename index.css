@@ -1,5 +1,6 @@
 @import "./lib/filter";
 @import "./lib/list";
+@import "./lib/search";
 @import "./lib/timetravel";
 
 :root {
