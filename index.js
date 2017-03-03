@@ -2,12 +2,12 @@ const html = require('yo-yo');
 const sendAction = require('send-action');
 const { jsonp, scrape } = require('./lib/utils');
 const app = require('./lib/app');
-const todos = require('./lib/todos/sample');
+const todoSample = require('./lib/todos/sample');
 
 const INITIAL_STATE = {
   expanded: [],
   search: '',
-  todos: process.env.NODE_ENV !== 'production' ? todos : [],
+  todos: process.env.NODE_ENV !== 'production' ? todoSample : [],
   events: [],
   schedule: [],
   notifications: [],
@@ -92,6 +92,15 @@ const send = sendAction({
 
       case 'search:find': return clone(state, { search: data });
 
+      case 'todo:done': {
+        const index = state.todos.findIndex(todo => todo.id === data);
+        const todo = Object.assign({}, state.todos[index], { status: 'done'});
+        const todos = state.todos.slice();
+
+        todos.splice(index, 1, todo);
+
+        return clone(state, { search: '', todos });
+      }
       case 'todo:add': return clone(state, {
         search: '',
         showTodos: true,
