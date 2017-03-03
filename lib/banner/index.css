@@ -16,7 +16,6 @@
   float: left;
   display: flex;
   flex-direction: column;
-  width: 200px;
 }
 
 .Banner-header {
@@ -32,5 +31,50 @@
 }
 
 .Banner-event {
+  box-sizing: border-box;
+  float: left;
+  clear: both;
   list-style: none;
+  padding: 0.75em;
+  margin: 0 0 1em;
+
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+
+  color: #fff;
+  line-height: 1.5;
+  font-size: 12px;
+  background-color: var(--deep-sky-blue);
+  -webkit-font-smoothing: antialiased;
+  transition:
+    width 400ms cubic-bezier(0.075, 0.82, 0.165, 1),
+    padding 400ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.Banner-event:hover {
+  box-sizing: content-box;;
+  padding-right: 25px;
+  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.Banner-event::after {
+  content: "";
+  width: 100px;
+  height: 100px;
+
+  position: absolute;
+  left: 100%;
+  top: 0;
+
+  background: var(--sky-blue);
+  transform: rotate(45deg);
+  transform-origin: top left;
+  box-shadow: -1px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.Banner-link,
+.Banner-link:visited {
+  color: #fff;
+  cursor: pointer;
 }
