@@ -49,6 +49,7 @@
   position: relative;
 
   transition: background-color 250ms ease-out;
+  border-radius: 5px;
 }
 
 .Banner-event:hover {
@@ -104,12 +105,13 @@
 
   position: absolute;
   left: 0;
-  top: calc(100% + 2px);
+  top: calc(100% + 5px);
 
   color: #fff;
   line-height: 1.5;
   font-size: 12px;
   white-space: nowrap;
+  border-radius: 2px;
   -webkit-font-smoothing: antialiased;
 
   animation-name: Banner-popup--appear;
@@ -141,21 +143,59 @@
 .Banner-popup::before {
   content: "";
   width: 100%;
-  height: 2px;
+  height: 5px;
   position: absolute;
   left: 0;
   bottom: 100%;
 }
 
+.Banner-popup::after {
+  content: "";
+  border: 5px solid;
+  position: absolute;
+  left: 10px;
+  top: -10px;
+}
+
+.Banner-event--schedule .Banner-popup::after {
+  border-color: transparent transparent var(--sky-blue);
+}
+
+.Banner-event--todo .Banner-popup::after {
+  border-color: transparent transparent var(--tomato);
+}
+
+.Banner-event--event .Banner-popup::after {
+  border-color: transparent transparent var(--lime);
+}
+
 .Banner-popup--ontop {
   top: auto;
-  bottom: calc(100% + 2px);
+  bottom: calc(100% + 5px);
   animation-name: Banner-popup--appearReverse;
 }
 
 .Banner-popup--ontop::before {
   bottom: auto;
   top: 100%;
+}
+
+.Banner-popup--ontop::after {
+  left: 10px;
+  top: auto;
+  bottom: -10px;
+}
+
+.Banner-event--schedule .Banner-popup--ontop::after {
+  border-color: var(--sky-blue) transparent transparent;
+}
+
+.Banner-event--todo .Banner-popup--ontop::after {
+  border-color: var(--tomato) transparent transparent;
+}
+
+.Banner-event--event .Banner-popup--ontop::after {
+  border-color: var(--lime) transparent transparent;
 }
 
 .Banner-popup.is-disappearing {
