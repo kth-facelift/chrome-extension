@@ -92,6 +92,12 @@ const send = sendAction({
 
       case 'search:find': return clone(state, { search: data });
 
+      case 'todo:add': return clone(state, {
+        search: '',
+        showTodos: true,
+        todos: [ ...state.todos, data ]
+      });
+
       // Action is not acocunted for, just forward current state
       default: return clone(state);
     }

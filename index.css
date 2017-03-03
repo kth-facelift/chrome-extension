@@ -1,5 +1,7 @@
 @import "./lib/filter";
+@import "./lib/form";
 @import "./lib/list";
+@import "./lib/modal";
 @import "./lib/search";
 @import "./lib/timetravel";
 

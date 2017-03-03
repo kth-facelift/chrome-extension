@@ -1,0 +1,58 @@
+/** @define Form */
+
+.Form {
+  box-sizing: border-box;
+  width: 350px;
+  max-width: 100%;
+  padding: 1.5em;
+  overflow: hidden;
+}
+
+.Form-input,
+.Form-input:invalid {
+  box-sizing: border-box;
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  padding: 0.25em 0.5em !important;
+  margin: 0 !important;
+  border: 1px solid var(--silver) !important;
+  outline: none;
+
+  font-size: 16px;
+  line-height: 1.2;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  background-color: #fff !important;
+  -webkit-appearance: none;
+}
+
+.Form-label {
+  display: block;
+  margin: 0 0 1em !important;
+  font-weight: bold;
+}
+
+.Form-button {
+  display: block;
+  width: 100%;
+  height: auto !important;
+  padding: 1em 1em !important;
+  margin: 1em 0;
+  border: 0;
+
+  color: #fff;
+  outline: none;
+  font-weight: bold !important;
+  border-radius: 2px !important;
+  background-color: var(--deep-sky-blue) !important;
+}
+
+.Form-button:last-child {
+  margin-bottom: 0;
+}
+
+.Form-button--cancel {
+  color: var(--black);
+  background-color: var(--smoke) !important;
+}
