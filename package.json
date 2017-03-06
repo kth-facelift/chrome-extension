@@ -1,6 +1,6 @@
 {
   "name": "kth-social-revamp",
-  "version": "0.1.0",
+  "version": "0.2.0-alpha",
   "description": "Chrome extension for the KTH Facelift research project",
   "main": "index.js",
   "scripts": {
