@@ -3,6 +3,7 @@
 .Search {
   margin: 1rem 0;
   position: relative;
+  overflow: hidden;
 }
 
 .Search-input {
@@ -12,14 +13,27 @@
   height: auto !important;
   padding: 0.5em 1em !important;
   margin: 0 !important;
-  border: 1px solid var(--silver) !important;
+  border: 2px solid var(--deep-sky-blue) !important;
   outline: none;
 
   font-size: 16px;
   line-height: 1.4;
-  border-radius: 2em !important;
+  border-radius: 2px !important;
   box-shadow: none !important;
   -webkit-appearance: none;
+}
+
+.Search-input::-webkit-input-placeholder {
+  font-size: 14px;
+}
+
+@keyframes Search-add--appear {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
 }
 
 .Search-add {
@@ -35,5 +49,10 @@
   font-weight: bold;
   outline: none;
   background-color: var(--deep-sky-blue);
-  border-radius: 0 2em 2em 0 !important;
+  border-radius: 0 2px 2px 0 !important;
+
+  animation-name: Search-add--appear;
+  animation-duration: 400ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
 }

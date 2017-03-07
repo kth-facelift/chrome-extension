@@ -15,7 +15,7 @@
   width: 100% !important;
   height: auto !important;
   padding: 0.25em 0.5em !important;
-  margin: 0 !important;
+  margin: 0.5em 0 1em !important;
   border: 1px solid var(--silver) !important;
   outline: none;
 
@@ -27,8 +27,57 @@
   -webkit-appearance: none;
 }
 
-.Form-label {
+.Form-input::-webkit-calendar-picker-indicator {
+  opacity: 1;
+}
+
+.Form-legend {
   display: block;
-  margin: 0 0 1em !important;
+  margin: 0;
   font-weight: bold;
+}
+
+.Form-label {
+  flex-grow: 1;
+  display: block;
+  margin: 0 !important;
+  font-weight: bold;
+}
+
+.Form-optgroup {
+  display: flex;
+  border: 1px solid var(--smoke);
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.Form-optgroup > :first-child {
+  overflow: hidden;
+  border-radius: 2px 0 0 2px;
+}
+
+.Form-optgroup > :last-child {
+  overflow: hidden;
+  border-radius: 0 2px 2px 0;
+}
+
+.Form-checkbox {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.Form-option {
+  display: block;
+  padding: 0.6em 0.5em;
+  text-align: center;
+}
+
+.Form-checkbox:checked + .Form-option {
+  color: #fff;
+  background-color: var(--deep-sky-blue);
 }
