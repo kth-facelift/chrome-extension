@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "KTH Social Revamp",
-  "description": "Prototype for KTH Social revamp as a browser extension",
+  "name": "KTH Chronogram",
+  "description": "Prototype for an interface on KTH Social",
   "version": "1.0",
   "icons": {
     "16": "assets/kth-logo-16.png",
