@@ -1,6 +1,6 @@
 const html = require('yo-yo');
 const sendAction = require('send-action');
-const { jsonp, scrape } = require('./lib/utils');
+const { jsonp, scrape, capitalize } = require('./lib/utils');
 const app = require('./lib/app');
 const tracker = require('./lib/tracker');
 const todoSample = require('./lib/todos/sample');
@@ -22,6 +22,12 @@ const INITIAL_STATE = {
   showTodos: true,
   showNotifications: true
 };
+
+/**
+ * Set the appropiate title
+ */
+
+document.title = `KTH | ${ capitalize(NAMESPACE) }`;
 
 /**
  * Read previously stored state from local storage

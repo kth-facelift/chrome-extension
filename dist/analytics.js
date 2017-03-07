@@ -8,6 +8,10 @@
   let isInitialized = false;
   const queue = [];
 
+  chrome.browserAction.onClicked.addListener(tab => chrome.tabs.update(tab.id, {
+    url: 'https://www.kth.se/social/home/subscriptions/'
+  }));
+
   chrome.runtime.onMessage.addListener((request, sender) => {
     if (request.type === 'tracker:create') {
       if (!isInitialized) {
