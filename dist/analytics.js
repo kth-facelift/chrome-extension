@@ -1,65 +1,109 @@
-const NAME_SPACE = 'chronicle';
-const ANALYTICS_ID = 'UA-12370753-3';
-const ANALYTICS_CDN = 'https://www.google-analytics.com/analytics.js';
+(function () {
+  'use strict';
 
-chrome.runtime.onMessage.addListener(request => {
-  if (request.type === 'tracker:create') {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = ANALYTICS_CDN;
-    script.onload = onload;
-    script.onerror = onerror;
+  const NAMESPACE = 'chronicle';
+  const ANALYTICS_ID = 'UA-12370753-3';
+  const ANALYTICS_CDN = 'https://www.google-analytics.com/analytics_debug.js';
 
-    document.body.appendChild(script);
-  }
-});
+  let isInitialized = false;
+  const queue = [];
 
-chrome.runtime.onMessage.addListener(request => {
-  const match = request.type.match(/^tracker:(\w+)/);
+  chrome.runtime.onMessage.addListener((request, sender, callback) => {
+    if (request.type === 'tracker:create') {
+      if (!isInitialized) {
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = ANALYTICS_CDN;
+        script.onload = onload;
+        script.onerror = onerror;
 
-  if (match) {
-    if (match[1] === 'send') {
-      send(...request.args);
+        document.body.appendChild(script);
+      } else {
+        onload();
+      }
+    } else if (!isInitialized) {
+      queue.push(() => onrequest(request, sender, callback));
+    } else {
+      onrequest(request, sender, callback);
     }
-    if (match[1] === 'event') {
-      event(...request.args);
+
+    function onrequest(request, sender, callback) {
+      const match = request.type.match(/^tracker:(\w+)/);
+
+      if (match) {
+        if (match[1] === 'create') {
+          if (!isInitialized) {
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = ANALYTICS_CDN;
+            script.onload = onload;
+            script.onerror = onerror;
+
+            document.body.appendChild(script);
+
+            isInitialized = true;
+          } else {
+            onload();
+          }
+        } else {
+          if (match[1] === 'send') {
+            send(...request.args, callback);
+          }
+          if (match[1] === 'event') {
+            event(...request.args, callback);
+          }
+          if (match[1] === 'set') {
+            set(...request.args, callback);
+          }
+        }
+      }
+
+      function send(...args) {
+        ga(`${ NAMESPACE }.send`, ...args);
+      }
+
+      function event(category, action, label, value) {
+        const fields = typeof category === 'object' ? category : {
+          eventCategory: category,
+          eventAction: action,
+          eventLabel: label,
+          eventValue: typeof value === 'string' ? +value : value
+        };
+
+        fields.transport = 'beacon';
+
+        send('event', fields);
+      }
+
+      function set(prop, value) {
+        ga(`${ NAMESPACE }.set`, prop, value);
+      }
+
     }
-    if (match[1] === 'set') {
-      set(...request.args);
+
+    function onerror(err) {
+      chrome.tabs.sendMessage(sender.tab.id, {
+        type: 'tracker:error',
+        err: err.message
+      });
     }
-  }
-});
 
-function send(...args) {
-  ga(`${ NAME_SPACE }.send`, ...args);
-}
+    function onload() {
+      if (!ga.getByName(NAMESPACE)) {
+        ga('create', ANALYTICS_ID, 'none', NAMESPACE, { userId: request.user });
+        ga(`${ NAMESPACE }.set`, 'checkProtocolTask', function noop() { /* noop */ });
+      }
 
-function event(category, action, label) {
-  const fields = typeof category === 'object' ? category : {
-    eventCategory: category,
-    eventAction: action,
-    eventLabel: label
-  };
+      ga(`${ NAMESPACE }.send`, 'pageview');
 
-  send('event', fields);
-}
+      if (queue.length) {
+        let fn;
+        while ((fn = queue.pop())) {
+          fn();
+        }
+      }
 
-function set(prop, value) {
-  ga(`${ NAME_SPACE }.set`, prop, value);
-}
-
-function onerror(err) {
-  sendMessage('tracker:error', { err: err.message });
-}
-
-function onload() {
-  ga('create', ANALYTICS_ID, 'auto', NAME_SPACE);
-  send('pageview');
-  sendMessage('tracker:ready');
-}
-
-function sendMessage(type, body = {}) {
-  chrome.tabs.query({ currentWindow: true, active: true }, tabs => {
-    chrome.tabs.sendMessage(tabs[0].id, Object.assign({ type }, body));
+      isInitialized = true;
+    }
   });
-}
+}());

@@ -2,7 +2,7 @@ const html = require('yo-yo');
 const sendAction = require('send-action');
 const { jsonp, scrape } = require('./lib/utils');
 const app = require('./lib/app');
-const createTracker = require('./lib/tracker');
+const tracker = require('./lib/tracker');
 const todoSample = require('./lib/todos/sample');
 
 const INITIAL_STATE = {
@@ -36,17 +36,18 @@ if (storedState) {
  * Set up event tracking
  */
 
-const tracker = createTracker();
 try {
-  // FIXME: Need better source of truth
   const profile = document.querySelector('.postForm.comment .profilepicture');
   const user = profile.href.match(/\/(\w+)\/$/)[1];
 
-  tracker.set('userId', user);
+  tracker.create(user);
 } catch (err) {
-  /**
-   * Continue without userId
-   */
+  tracker.create();
+
+  if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line no-console
+    console.error(err);
+  }
 }
 
 /**
@@ -72,7 +73,14 @@ const send = sendAction({
    */
 
   onAction(state, action, data) {
-    tracker(state, action, data);
+    try {
+      tracker.onAction(state, action, data);
+    } catch (err) {
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.error(err);
+      }
+    }
 
     switch (action) {
       // Let `init` overwrite whatever may happen to be in the current state
