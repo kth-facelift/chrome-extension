@@ -32,27 +32,3 @@
   margin: 0 0 1em !important;
   font-weight: bold;
 }
-
-.Form-button {
-  display: block;
-  width: 100%;
-  height: auto !important;
-  padding: 1em 1em !important;
-  margin: 1em 0;
-  border: 0;
-
-  color: #fff;
-  outline: none;
-  font-weight: bold !important;
-  border-radius: 2px !important;
-  background-color: var(--deep-sky-blue) !important;
-}
-
-.Form-button:last-child {
-  margin-bottom: 0;
-}
-
-.Form-button--cancel {
-  color: var(--black);
-  background-color: var(--smoke) !important;
-}

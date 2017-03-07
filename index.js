@@ -5,9 +5,11 @@ const app = require('./lib/app');
 const tracker = require('./lib/tracker');
 const todoSample = require('./lib/todos/sample');
 
+const DEFAULT_DAYS = 7;
 const INITIAL_STATE = {
   expanded: [],
   search: '',
+  daysShown: DEFAULT_DAYS,
   todos: process.env.NODE_ENV !== 'production' ? todoSample : [],
   events: [],
   schedule: [],
@@ -105,7 +107,10 @@ const send = sendAction({
       // Allow modifying the current time
       case 'timetravel': return Object.assign(state, { now: data });
 
-      case 'expand:toggle': {
+      case 'list:more': return clone(state, {
+        daysShown: state.daysShown + DEFAULT_DAYS
+      });
+      case 'list:toggle': {
         const expanded = state.expanded.slice();
         const index = expanded.findIndex(id => id === data.id);
 
@@ -160,7 +165,11 @@ const send = sendAction({
    * @type {Object}
    */
 
-  state: storedState ? clone(INITIAL_STATE, storedState) : INITIAL_STATE
+  state: storedState ? clone(INITIAL_STATE, storedState, {
+    daysShown: DEFAULT_DAYS,
+    search: '',
+    expanded: []
+  }) : INITIAL_STATE
 });
 
 /**
