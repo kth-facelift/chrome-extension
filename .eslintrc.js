@@ -1,4 +1,8 @@
 module.exports = {
+  "globals": {
+    "ga": true,
+    "chrome": true
+  },
   "env": {
     "browser": true,
     "node": true,

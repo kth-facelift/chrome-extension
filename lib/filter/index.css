@@ -2,7 +2,16 @@
 
 .Filter {
   margin: 1rem 0;
-  overflow: hidden;
+}
+
+.Filter::before,
+.Filter::after {
+  content: " ";
+  display: table;
+}
+
+.Filter::after {
+  clear: both;
 }
 
 .Filter-legend {

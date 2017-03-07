@@ -2,6 +2,7 @@ const html = require('yo-yo');
 const sendAction = require('send-action');
 const { jsonp, scrape } = require('./lib/utils');
 const app = require('./lib/app');
+const createTracker = require('./lib/tracker');
 const todoSample = require('./lib/todos/sample');
 
 const INITIAL_STATE = {
@@ -32,6 +33,23 @@ if (storedState) {
 }
 
 /**
+ * Set up event tracking
+ */
+
+const tracker = createTracker();
+try {
+  // FIXME: Need better source of truth
+  const profile = document.querySelector('.postForm.comment .profilepicture');
+  const user = profile.href.match(/\/(\w+)\/$/)[1];
+
+  tracker.set('userId', user);
+} catch (err) {
+  /**
+   * Continue without userId
+   */
+}
+
+/**
  * Find root node where to inject application
  */
 
@@ -54,6 +72,8 @@ const send = sendAction({
    */
 
   onAction(state, action, data) {
+    tracker(state, action, data);
+
     switch (action) {
       // Let `init` overwrite whatever may happen to be in the current state
       case 'init': return clone(state, data);
@@ -140,16 +160,20 @@ const send = sendAction({
  */
 
 if (!storedState || process.env.NODE_ENV !== 'development') {
+  const exception = type => err => tracker.send('exception', {
+    exDescription: `${ type }: ${ err.message }`
+  });
+
   jsonp('https://www.kth.se/social/home/personal-menu/courses/')
-    .then(require('./lib/courses/parse'))
+    .then(require('./lib/courses/parse'), exception('Courses'))
     .then(props => send('init', { courses: props }));
 
   scrape('https://www.kth.se/social/home/calendar/')
-    .then(require('./lib/schedule/parse'))
+    .then(require('./lib/schedule/parse'), exception('Schedule'))
     .then(props => send('init', { schedule: props }));
 
   scrape('https://www.kth.se/social/notifications/notice_list/')
-    .then(require('./lib/notifications/parse'))
+    .then(require('./lib/notifications/parse'), exception('Notifications'))
     .then(props => {
       const { notifications: prev } = send.state();
       const notifications = props.map(item => {
@@ -168,7 +192,7 @@ if (!storedState || process.env.NODE_ENV !== 'development') {
     });
 
   scrape('https://www.kth.se/aktuellt/kalender?date=2017-02-19&length=90')
-    .then(require('./lib/events/parse'))
+    .then(require('./lib/events/parse'), exception('Events'))
     .then(props => send('init', { events: props }));
 }
 
