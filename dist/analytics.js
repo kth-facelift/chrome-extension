@@ -62,12 +62,11 @@
         ga(`${ NAMESPACE }.send`, ...args);
       }
 
-      function event(category, action, label, value) {
+      function event(category, action, label) {
         const fields = typeof category === 'object' ? category : {
           eventCategory: category,
           eventAction: action,
-          eventLabel: label,
-          eventValue: typeof value === 'string' ? +value : value
+          eventLabel: label
         };
 
         fields.transport = 'beacon';
