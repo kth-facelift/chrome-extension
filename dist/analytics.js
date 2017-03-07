@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const NAMESPACE = 'chronicle';
+  const NAMESPACE = 'chronogram';
   const ANALYTICS_ID = 'UA-12370753-3';
   const ANALYTICS_CDN = 'https://www.google-analytics.com/analytics_debug.js';
 

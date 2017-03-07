@@ -5,8 +5,10 @@ const app = require('./lib/app');
 const tracker = require('./lib/tracker');
 const todoSample = require('./lib/todos/sample');
 
+const NAMESPACE = 'chronogram';
 const DEFAULT_DAYS = 7;
 const INITIAL_STATE = {
+  namespace: NAMESPACE,
   expanded: [],
   search: '',
   daysShown: DEFAULT_DAYS,
@@ -25,7 +27,7 @@ const INITIAL_STATE = {
  * Read previously stored state from local storage
  */
 
-let storedState = localStorage.getItem('kth-facelift-state');
+let storedState = localStorage.getItem(NAMESPACE);
 if (storedState) {
   try {
     storedState = JSON.parse(storedState);
@@ -157,7 +159,7 @@ const send = sendAction({
     html.update(tree, render(state, prev));
 
     // Store state in local storage for performance sake
-    localStorage.setItem('kth-facelift-state', JSON.stringify(state));
+    localStorage.setItem(NAMESPACE, JSON.stringify(state));
   },
 
   /**
