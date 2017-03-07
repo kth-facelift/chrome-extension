@@ -8,7 +8,7 @@
   let isInitialized = false;
   const queue = [];
 
-  chrome.runtime.onMessage.addListener((request, sender, callback) => {
+  chrome.runtime.onMessage.addListener((request, sender) => {
     if (request.type === 'tracker:create') {
       if (!isInitialized) {
         const script = document.createElement('script');
@@ -22,12 +22,12 @@
         onload();
       }
     } else if (!isInitialized) {
-      queue.push(() => onrequest(request, sender, callback));
+      queue.push(() => onrequest(request, sender));
     } else {
-      onrequest(request, sender, callback);
+      onrequest(request, sender);
     }
 
-    function onrequest(request, sender, callback) {
+    function onrequest(request, sender) {
       const match = request.type.match(/^tracker:(\w+)/);
 
       if (match) {
@@ -47,13 +47,13 @@
           }
         } else {
           if (match[1] === 'send') {
-            send(...request.args, callback);
+            send(...request.args);
           }
           if (match[1] === 'event') {
-            event(...request.args, callback);
+            event(...request.args);
           }
           if (match[1] === 'set') {
-            set(...request.args, callback);
+            set(...request.args);
           }
         }
       }
