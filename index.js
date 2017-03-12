@@ -8,6 +8,7 @@ const todoSample = require('./lib/todos/sample');
 const NAMESPACE = 'chronogram';
 const DEFAULT_DAYS = 7;
 const INITIAL_STATE = {
+  version: require('./package.json').version,
   namespace: NAMESPACE,
   expanded: [],
   search: '',

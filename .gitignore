@@ -4,5 +4,6 @@ node_modules
 # Build
 *.crx
 *.pem
+*.zip
 dist/index.js
 dist/index.css

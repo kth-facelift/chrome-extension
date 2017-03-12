@@ -1,15 +1,16 @@
 {
   "manifest_version": 2,
   "name": "KTH Chronogram",
-  "description": "Prototype for an interface on KTH Social",
-  "version": "1.0",
+  "description": "Get an overview of your studies, see what's coming up and plan ahead.",
+  "version": "1.1.0",
   "icons": {
-    "16": "assets/kth-logo-16.png",
-    "48": "assets/kth-logo-48.png",
-    "128": "assets/kth-logo-128.png"
+    "16": "assets/16.png",
+    "48": "assets/48.png",
+    "128": "assets/128.png",
+    "256": "assets/256.png"
   },
   "browser_action": {
-    "default_icon": "assets/kth-logo-16.png",
+    "default_icon": "assets/16.png",
     "default_title": "Go to KTH Chronogram"
   },
   "permissions": [

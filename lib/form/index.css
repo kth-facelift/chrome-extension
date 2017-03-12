@@ -8,6 +8,11 @@
   overflow: hidden;
 }
 
+.Form-title {
+  margin: 0 0 1em;
+  text-align: center;
+}
+
 .Form-input,
 .Form-input:invalid {
   box-sizing: border-box;
