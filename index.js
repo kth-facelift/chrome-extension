@@ -44,6 +44,22 @@ if (storedState) {
 }
 
 /**
+ * Migrate stored state to new version
+ */
+
+if (storedState && storedState.version !== INITIAL_STATE.version) {
+  storedState.todos = storedState.todos.map(todo => {
+    const sample = todoSample.find(sample => sample.id === todo.id);
+
+    if (sample) {
+      return Object.assign({}, todo, sample);
+    }
+
+    return todo;
+  });
+}
+
+/**
  * Set up event tracking
  */
 
