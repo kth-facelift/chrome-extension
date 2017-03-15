@@ -99,16 +99,21 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.List-dismiss {
+.List-actions {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: var(--space-s);
+  top: var(--space-s);
+}
+
+.List-action {
   display: block;
   width: 1em;
   height: 1em;
   padding: 0;
+  margin-bottom: 0.5em;
   border: 0;
-
-  position: absolute;
-  right: var(--space-s);
-  top: var(--space-s);
 
   outline: 0;
   font-size: 1.25em;
@@ -118,7 +123,11 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.List-dismiss:hover {
+.List-action:hover {
+  color: var(--deep-sky-blue);
+}
+
+.List-action--dismiss:hover {
   color: var(--orange-red);
 }
 

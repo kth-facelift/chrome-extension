@@ -136,7 +136,7 @@ const send = sendAction({
 
       case 'todo:done': {
         const index = state.todos.findIndex(todo => todo.id === data);
-        const todo = Object.assign({}, state.todos[index], { status: 'done'});
+        const todo = Object.assign({}, state.todos[index], { status: 'done' });
         const todos = state.todos.slice();
 
         todos.splice(index, 1, todo);
@@ -148,6 +148,15 @@ const send = sendAction({
         showTodos: true,
         todos: [ ...state.todos, data ]
       });
+      case 'todo:update': {
+        const index = state.todos.findIndex(todo => todo.id === data.id);
+        const todo = Object.assign({}, state.todos[index], data);
+        const todos = state.todos.slice();
+
+        todos.splice(index, 1, todo);
+
+        return clone(state, { todos });
+      }
 
       // Action is not acocunted for, just forward current state
       default: return clone(state);
