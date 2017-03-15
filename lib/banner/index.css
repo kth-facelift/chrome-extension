@@ -1,8 +1,16 @@
 /** @define Banner */
 
 .Banner {
+  border-bottom: 1px dashed var(--silver);
+  margin: 0 -20px 3rem;
   overflow: auto;
-  margin: 0 0 2rem;
+}
+
+@media (--lg-viewport) {
+  .Banner {
+    margin-left: -38px;
+    margin-right: -38px;
+  }
 }
 
 .Banner-days {
