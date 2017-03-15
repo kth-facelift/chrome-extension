@@ -5,10 +5,11 @@ const app = require('./lib/app');
 const tracker = require('./lib/tracker');
 const todoSample = require('./lib/todos/sample');
 
+const VERSION = require('./package.json').version;
 const NAMESPACE = 'chronogram';
 const DEFAULT_DAYS = 7;
 const INITIAL_STATE = {
-  version: require('./package.json').version,
+  version: VERSION,
   namespace: NAMESPACE,
   expanded: [],
   search: '',
@@ -47,7 +48,8 @@ if (storedState) {
  * Migrate stored state to new version
  */
 
-if (storedState && storedState.version !== INITIAL_STATE.version) {
+if (storedState && storedState.version !== VERSION) {
+  storedState.version = VERSION;
   storedState.todos = storedState.todos.map(todo => {
     const sample = todoSample.find(sample => sample.id === todo.id);
 
