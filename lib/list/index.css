@@ -40,8 +40,8 @@
 }
 
 .List-content {
-  position: relative;
   padding: var(--space-s) var(--space-s) var(--space-s) calc(var(--space-s) * 2.5);
+  position: relative;
   font-size: 1.35rem;
   line-height: 1.5;
 }
@@ -73,6 +73,14 @@
 
 .List-content--event::before {
   background-color: var(--lawn-green);
+}
+
+.List-badge {
+  padding: 0.25em 0.75em 0.20em;
+  color: #fff;
+  background-color: var(--tomato);
+  border-radius: 1em;
+  line-height: 1.5;
 }
 
 /**
