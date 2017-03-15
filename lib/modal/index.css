@@ -42,6 +42,23 @@
   animation-fill-mode: forwards;
 }
 
+.Modal-dismiss {
+  padding: 0;
+  border: 0;
+
+  position: absolute;
+  top: 1em;
+  right: 1em;
+
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+}
+
+.Modal-dismiss:hover {
+  color: var(--deep-sky-blue);
+}
+
 .Modal.is-disappearing {
   background-color: rgba(0, 0, 0, 0);
 }
