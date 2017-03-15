@@ -3,3 +3,10 @@
 .App {
   z-index: 1;
 }
+
+.App-message {
+  margin: 2em 0;
+  text-align: center;
+  font-style: italic;
+  font-size: 1.5rem;
+}

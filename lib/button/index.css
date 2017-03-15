@@ -23,3 +23,15 @@
   color: var(--black);
   background-color: var(--smoke) !important;
 }
+
+.Button--link {
+  display: inline;
+  width: auto;
+  padding: 0 !important;
+  margin: 0;
+  color: var(--color-link);
+  font-style: inherit;
+  font-size: 1em;
+  font-weight: inherit !important;
+  background-color: transparent !important;
+}

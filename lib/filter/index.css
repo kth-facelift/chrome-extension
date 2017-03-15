@@ -1,16 +1,16 @@
 /** @define Filter */
 
 .Filter {
-  margin: 1rem 0;
+  margin: 0.75rem 0 3.75rem;
 }
 
-.Filter::before,
-.Filter::after {
+.Filter-container::before,
+.Filter-container::after {
   content: " ";
   display: table;
 }
 
-.Filter::after {
+.Filter-container::after {
   clear: both;
 }
 
@@ -40,10 +40,14 @@
 }
 
 @media (--md-viewport), (--lg-viewport) {
-  .Filter {
+  .Filter-container {
     display: flex;
     justify-content: flex-start;
     align-items: baseline;
+  }
+
+  .Filter-toggle {
+    float: none;
   }
 
   .Filter-legend {

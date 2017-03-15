@@ -1,7 +1,7 @@
 /** @define Search */
 
 .Search {
-  margin: 1rem 0;
+  margin: 1rem 0 0.75rem;
   position: relative;
   overflow: hidden;
 }
