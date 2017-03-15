@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "KTH Chronogram",
   "description": "Get an overview of your studies, see what's coming up and plan ahead.",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "icons": {
     "16": "assets/16.png",
     "48": "assets/48.png",
